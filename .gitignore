@@ -136,3 +136,5 @@ Courses_Materials/
 *.json
 /Courses_Materials
 .vscode
+/sync_to_pi.sh
+/download course files.ipynb

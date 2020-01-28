@@ -1,0 +1,7 @@
+{
+    "python": "/home/henryhuang/.conda/envs/web/bin/python", 
+    "web_url": "https://courseworks2.columbia.edu/",
+    "token": "1396~E6GZ0tiz01nLqjL0mB9YTPxOh3ZbEQ7WOCF3r3wIDBsyDSFXukCQvlTtq366RZjM",
+    "num_threads": 10,
+    "base_path": "./Courses_Materials"
+}

@@ -1,8 +1,8 @@
 {
-    "python": "/usr/local/bin/python3.6",
-    "web_url": "https://courseworks2.columbia.edu/",
-    "token": "1396~E6GZ0tiz01nLqjL0mB9YTPxOh3ZbEQ7WOCF3r3wIDBsyDSFXukCQvlTtq366RZjM",
+    "python": [your runtime python here],
+    "web_url": [your univerisity canvas page],
+    "token": [Your canvas token]
     "num_threads": 10,
-    "base_path": "./Courses_Materials",
-    "dest_path":"CU:Courses"
+    "base_path": [relative path for downloading files],
+    "dest_path": [remote web drive path configured using rclone, e.g. server:path]
 }

@@ -1,8 +1,8 @@
 {
-    "python": [your runtime python here],
     "web_url": [your univerisity canvas page],
-    "token": [Your canvas token]
-    "num_threads": 10,
+    "token": [Your canvas token],
     "base_path": [relative path for downloading files],
-    "dest_path": [remote web drive path configured using rclone, e.g. server:path]
+    
+    "python": [your runtime python here, optional],
+    "dest_path": [remote web drive path configured using rclone, i.e. server:path, optional]
 }

@@ -4,6 +4,7 @@ from pathlib import Path
 import json
 from multiprocessing.dummy import Pool
 import requests
+import argparse
 
 
 class FileObj:
@@ -34,7 +35,7 @@ def recursive_files(folder, path: Path, pool: Pool):
 
     try:
         for file in folder.get_files():
-            file_path = path / Path(file.display_name)
+            file_path = path / Path(file.filename)
             files.append(FileObj(file, file_path))
     except CanvasException as ex:
         print("[Warning] Exception {} occurs when reading files from folder \"{}\"".format(ex.message, folder.name))
@@ -60,15 +61,38 @@ def download_course(course, base_path, pool: Pool):
 
 
 if __name__ == "__main__":
-    with open("config.json") as f:
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("--config", help="relative path for config file, the default is config.json", default="config.json")
+    parser.add_argument("--course", type=int,
+                        help="course id for the course needs downloading, " + 
+                        "the default value (-1) will just print a ordered list of courses; " + 
+                        "-2 will download all files and other integer will download the corresponding course.", 
+                        default="-1")
+    parser.add_argument("--threads", help="number of threads used for downloading, default 5", default=5)
+
+    args = parser.parse_args()
+
+    with open(args.config) as f:
         config = json.loads(f.read())
 
     canvas = Canvas(config["web_url"], config["token"])
 
     courses = canvas.get_courses()
 
-    pool = Pool(processes=config["num_threads"])
+    length = len(list(courses))
 
-    for course in courses:
+    pool = Pool(processes=args.threads)
+
+    if args.course == -1:
+        for id, course in enumerate(courses):
+            print("\t{}\t{}\n".format(id, course))
+    elif args.course == -2:
+        for course in courses:
+            download_course(course, config["base_path"], pool)
+    elif args.course in range(0, length):
+        course = courses[args.course]
         download_course(course, config["base_path"], pool)
+    else:
+        print("Course ID {} out of bound [{}, {}]".format(args.course, 0, length - 1))
 

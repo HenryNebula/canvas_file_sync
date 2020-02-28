@@ -44,6 +44,7 @@ def recursive_files(folder, path: Path, pool: Pool):
 
     try:
         for sibiling in folder.get_folders():
+            print(sibiling.name)
             folder_name = sibiling.name
             recursive_files(sibiling, path / Path(folder_name), pool)
     except CanvasException as ex:
@@ -52,12 +53,15 @@ def recursive_files(folder, path: Path, pool: Pool):
 
 def download_course(course, base_path, pool: Pool):
     try:
-        root_folder = course.get_folders()[0]
+        top_folders = course.get_folders()
+        names = [f.name for f in course.get_folders()]
+        root_folder = top_folders[names.index("course files")]
         recursive_files(root_folder, 
                         Path(base_path) / Path(course.name.replace(" ", "_")),
                         pool)
-    except IndexError:
-        print("No root folder for course {}".format(course.name))
+    except ValueError:
+        print("[Warning] No 'course files' directory found as root folder for course {}!\nCurrent top folders are {}"
+        .format(course.name, [f.name for f in course.get_folders()]))
 
 
 if __name__ == "__main__":

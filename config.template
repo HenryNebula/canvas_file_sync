@@ -1,8 +1,9 @@
 {
-    "web_url": [your univerisity canvas page],
+    "web_url": [your univerisity canvas page, e.g, ],
     "token": [Your canvas token],
-    "base_path": [relative path for downloading files],
+    "base_path": [relative path for downloading files, e.g, ./Courses/],
     
-    "python": [your runtime python here, optional],
-    "dest_path": [remote web drive path configured using rclone, i.e. server:path, optional]
+    "python": [your runtime python here, optional, e.g., /usr/bin/python3],
+    "dest_path": [remote web drive path configured in rclone, optional, e.g. server:path],
+    "rclone": [your runtime rclone path, optional, e.g., /usr/bin/rclone]
 }

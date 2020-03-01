@@ -1,5 +1,5 @@
 import json
-from pathlib import Path
+from os import path
 import argparse
 
 
@@ -12,8 +12,10 @@ args = parser.parse_args()
 
 key = args.key
 config = args.config
+file_path = path.dirname(path.abspath(__file__))
+file_path = path.join(file_path, config)
 
-with open(str(Path(__file__).parent.absolute() / config)) as f:
+with open(file_path) as f:
     dict_ = json.loads(f.read())
 
 print(dict_[key])

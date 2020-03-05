@@ -35,7 +35,7 @@ def recursive_files(folder, path: Path, pool: Pool):
 
     try:
         for file in folder.get_files():
-            file_path = path / Path(file.filename)
+            file_path = path / Path(file.display_name)
             files.append(FileObj(file, file_path))
     except CanvasException as ex:
         print("[Warning] Exception {} occurs when reading files from folder \"{}\"".format(ex.message, folder.name))

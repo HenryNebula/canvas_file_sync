@@ -13,5 +13,5 @@ py=$( python json_parser.py --config $CONFIG --key python )
 rc=$( python json_parser.py --config $CONFIG --key rclone )
 echo "runtime environment [python: $py, rclone: $rc]"
 $py canvas_sync.py --config $CONFIG --course -2
-$rc sync $src_dir $dest_dir --delete-before -v
+$rc sync $src_dir $dest_dir --delete-before -v -L
 echo "ALL FINISH"
